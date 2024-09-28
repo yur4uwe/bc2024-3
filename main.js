@@ -26,14 +26,18 @@ if(!input){
 }
 
 const inputPath = path.resolve(input);
-const result = readJsonFile(inputPath);
+const inputJSONFile = readJsonFile(inputPath);
 
 if (output || display){
+    const fileOutput = inputJSONFile.map(({StockCode, ValCode, Attraction}) => {
+        return `${StockCode}-${ValCode}-${Attraction}`;
+    });
+
     if (output){
         const outputPath = path.resolve(output);
-        fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
+        fs.writeFileSync(outputPath, fileOutput.join('\n'));
     }
     if (display){
-        console.log(result);
+        console.log(fileOutput.join('\n'));
     }
 }
