@@ -13,16 +13,18 @@ function readJsonFile(filePath){
 }
 
 program
-    .requiredOption('-i, --input <path>', 'output extra debugging')
+    .option('-i, --input <path>', 'output extra debugging')
     .option('-o, --output <path>', 'small pizza size')
     .option('-d, --display', 'small pizza size')
 
 program.parse(process.argv);
 
 const {input, output, display} = program.opts();
+console.log(input, output, display);
 
 if(!input){
     console.log('Please specify input file');
+    process.exit(1);
 }
 
 const inputPath = path.resolve(input);
